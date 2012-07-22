@@ -11,12 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120721170105) do
+ActiveRecord::Schema.define(:version => 20120721213912) do
 
   create_table "dwellings", :force => true do |t|
     t.string   "address"
     t.string   "nickname"
-    t.integer  "user_ids"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -30,6 +29,7 @@ ActiveRecord::Schema.define(:version => 20120721170105) do
     t.string   "zip"
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
+    t.integer  "dwelling_id"
   end
 
 end
