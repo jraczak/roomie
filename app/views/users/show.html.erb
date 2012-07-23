@@ -1,3 +1,6 @@
 <h1><%= @user.first_name %> <%= @user.last_name %></h1>
-<h3>Member since <%= @user.created_at.month %> <%= @user.created_at.year %></h3>
+<h3>Member of <%= link_to @user.dwelling.nickname, @user.dwelling %></h3>
+
+
+<h5>ADD RATINGS ABOUT ROOMMATES</h5>
 

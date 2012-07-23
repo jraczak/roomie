@@ -1,0 +1,24 @@
+<%= form_for(@dwelling) do |f| %>
+
+  <% if @dwelling.errors.any? %>
+  
+    <h2>The following <%= pluralize(@dwelling.errors.count, "error") %> prevented us from saving this dwelling. Check them   out, make corrections, then try again!</h2>
+    																													     
+    <ul>																												     
+      <% @dwelling.errors.full_messages.each do |m| %>																	     
+      <li><%= m %> </li>																								     
+    </ul>																												     
+    																													     
+    <% end %>																											     
+  
+  <% end %>
+  
+  <%= f.label :address %>
+  <%= f.text_field :address %>
+  
+  <%= f.label :nickname %>
+  <%= f.text_field :nickname %>
+  
+  <%= f.submit "Create my dwelling!", class: "btn btn-primary" %>
+  
+<% end %>
