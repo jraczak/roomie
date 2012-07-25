@@ -1,4 +1,21 @@
+<div class="row">
 <h1>Sign up for Roomie!</h1>
+</div>
+
+  <% if @user.errors.any? %>
+  
+    <h4 class="alert alert-error">The following <%= pluralize(@user.errors.count, "error") %> prevented us from creating your account. Check them out, make corrections, then try again!</h4>
+    																													     
+    <ul class="error-text">																												     
+      <% @user.errors.full_messages.each do |m| %>																	     
+      <li><%= m %></li>																								     
+    
+    <% end %>	
+    </ul>																											     
+    																													     
+  <% end %>
+
+<div class="row">
 
 <%= form_for(@user) do |f| %>
 
@@ -19,7 +36,9 @@
   
   <%= f.label :zip %>
   <%= f.text_field :zip %>
-  
+  </br>
   <%= f.submit "Create my account", class: "btn btn-primary" %>
   
 <% end %>
+
+</div>
