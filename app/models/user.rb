@@ -1,5 +1,9 @@
 class User < ActiveRecord::Base
   attr_accessible :email, :first_name, :last_name, :password, :password_confirmation, :zip
+  has_secure_password
+  
+  before_save { |user| user.email = email.downcase }
+  before_save :create_remember_token
   
   belongs_to :dwelling
   
@@ -15,6 +19,12 @@ class User < ActiveRecord::Base
   
   def full_name
     "#{first_name} #{last_name}"
+  end
+  
+private
+
+  def create_remember_token
+    self.remember_token = SecureRandom.urlsafe_base64
   end
 
 end

@@ -12,11 +12,11 @@
 
 <div class="container">
 
-  <% flash.each do |key, value| %>
-  
-  <%= value %>
-  
+
+  <% if flash.any? %>
+  <%= render 'shared/flash_messages' %>
   <% end %>
+  
   <%= yield %>
 
 </div>
