@@ -13,8 +13,17 @@
   
   <% end %>
   
-  <%= f.label :address %>
-  <%= f.text_field :address %>
+  <%= f.label :street_address %>
+  <%= f.text_field :street_address, placeholder: "123 Main St" %>
+  
+  <%= f.label :city %>
+  <%= f.text_field :city %>
+  
+  <%= f.label :state %>
+  <%= f.text_field :state %>
+  
+  <%= f.label :zip %>
+  <%= f.text_field :zip %>
   
   <%= f.label :nickname %>
   <%= f.text_field :nickname %>

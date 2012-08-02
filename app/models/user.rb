@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   before_save { |user| user.email = email.downcase }
   before_save :create_remember_token
   
-  has_one :dwelling
+  has_one :dwelling, dependent: :destroy
   
   validates :first_name, presence: true, length: { maximum: 50 }
   validates :last_name, presence: true, length: { maximum: 50 }
