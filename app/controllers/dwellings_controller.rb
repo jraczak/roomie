@@ -11,11 +11,17 @@ class DwellingsController < ApplicationController
   end
   
   def create
-    @dwelling = current_user.build_dwelling(params[:dwelling])
+    @dwelling = current_user.properties.build(params[:dwelling])
+    
     if @dwelling.save
-      flash[:success] = "Woohoo! Your dwelling has been created. Welcome home!"
+      current_user.dwelling = @dwelling
+      if current_user.save
+        flash[:success] = "Woohoo! Your dwelling has been created. Welcome home!"
+      else
+      flash[:notice] = "You have successfully created a dwelling, but something prevented us from adding you as a roomie. Please email support so we can try to correct this for you."
+      end
       redirect_to current_user
-    else
+      else
       render 'new'
     end
   end

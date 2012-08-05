@@ -4,7 +4,88 @@
 
 body {
   padding-top: 60px;
+  background-color: #f0f0ed;
   }
+  
+.navbar-inner {
+  background-color: #33363b;
+}
+
+.btn-blue {
+  background-color: #4090ba;
+  color: #ffffff;
+  padding: 12px 15px 12px 15px;
+  font-size: 12.5px;
+  font-weight: bold;
+  display: moz inline box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vetical-align: middle;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+}
+
+.btn-blue:hover {
+  background-color: #3981A7;
+  color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn-blue:active {
+  background-color: #2e6c8c;
+}
+
+.btn-green {
+  background-color: #6cb288;
+  color: #ffffff;
+  padding: 12px 15px 12px 15px;
+  font-size: 12.5px;
+  font-weight: bold;
+  display: moz inline box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vetical-align: middle;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+}
+
+.btn-green:hover {
+  background-color: #5e9b77;
+  color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn-red {
+  background-color: #db7267;
+  color: #ffffff;
+  padding: 12px 15px 12px 15px;
+  font-size: 12.5px;
+  font-weight: bold;
+  display: moz inline box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vetical-align: middle;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+}
+
+.btn-red:hover {
+  background-color: #bc645c;
+  color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+}
 
 
 
@@ -13,13 +94,21 @@ body {
   margin-right: 10px;
   font-size: 1.7em;
   color: white;
-  text-transform: uppercase;
   letter-spacing: -1px;
   padding-top: 9px;
-  font-weight: bold;
   line-height: 1;
   &:hover {
     color: white;
     text-decoration: none;
-    }
   }
+}
+  
+  /* ICONS */
+
+.icon-keys {
+  width: 43px;
+  height: 18px;
+  background-image: url('../images/key_icon.jpg');
+  margin-left: 5px;
+  margin-right: 5px;
+}
