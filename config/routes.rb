@@ -11,6 +11,7 @@ Roomie::Application.routes.draw do
   match '/signup', to: 'Users#new'
   match '/signin', to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete
+  match 'dwellings_controller/search/:q' => 'dwellings_controller#search'
   
   
   # The priority is based upon order of creation:

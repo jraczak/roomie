@@ -1,4 +1,8 @@
 class User < ActiveRecord::Base
+  
+  searchable do
+    text :email, :first_name, :last_name
+  end
   attr_accessible :email, :first_name, :last_name, :password, :password_confirmation, :zip, :dwelling_id
   has_secure_password
   
