@@ -19,7 +19,7 @@
     <div class="row">
     <% @dwelling.bills.each do |b| %>
         
-        <div class="span3 well">
+        <div class="span3 well <% if b.paid %>paid-bill<% end %>">
           <b><%= link_to b.name, b %></b><% if b.paid %><b> (PAID)</b><% end %></br>
           <%= b.provider %></br>
           <b>Total due:</b> $<%= b.total_due %></br>
