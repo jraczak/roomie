@@ -22,7 +22,7 @@
         <div class="span3 well <% if b.paid %>paid-bill<% end %>">
           <b><%= link_to b.name, b %></b><% if b.paid %><b> (PAID)</b><% end %></br>
           <%= b.provider %></br>
-          <b>Total due:</b> $<%= b.total_due %></br>
+          <b>Total due:</b> $<%= "%.2f" % b.total_due %></br>
           <b>Due in: </b>
           <% if Time.now > b.due_date %>
             <b>PAST DUE</b> (on <%= b.due_date.strftime("%m/%d/%Y") %>)</br>
