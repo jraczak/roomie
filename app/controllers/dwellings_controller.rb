@@ -2,12 +2,12 @@ class DwellingsController < ApplicationController
   
   before_filter :signed_in_user
 
-  def index
-    @result = Dwelling.search("545")
-    @dwellings = @result.results
-    puts "------- result ------"
-    puts @dwellings.to_yaml
-  end
+  #def index
+  #  @result = Dwelling.search("545")
+  #  @dwellings = @result.results
+  #  puts "------- result ------"
+  #  puts @dwellings.to_yaml
+  #end
   
   def show
     @dwelling = Dwelling.find(params[:id])
