@@ -10,27 +10,37 @@
     
     <ul id="roomie_list">
      <% @dwelling.roomies.each do |u| %>
-       <li><h4><%= link_to "#{u.first_name} #{u.last_name}", u %></h4></li>
+       <li><h4><%= link_to u.full_name, u %></h4></li>
     <% end %>
     </ul>
     
-  <h3><%= @dwelling.bills.count %> Active Bills</h3>
+  <legend><h3><%= @dwelling.bills.count %> Active Bills</h3></legend>
   <small><%= link_to "+ add a new bill", new_bill_path %></small>
     <div class="row">
     <% @dwelling.bills.each do |b| %>
         
         <div class="span3 well">
-          <b><%= link_to b.name, b %></b></br>
+          <b><%= link_to b.name, b %></b><% if b.paid %><b> (PAID)</b><% end %></br>
           <%= b.provider %></br>
           <b>Total due:</b> $<%= b.total_due %></br>
           <b>Due in: </b>
           <% if Time.now > b.due_date %>
-          <b>PAST DUE</b> (on <%= b.due_date.strftime("%m/%d/%Y") %>)</br>
+            <b>PAST DUE</b> (on <%= b.due_date.strftime("%m/%d/%Y") %>)</br>
           <% else %>
-          <%= distance_of_time_in_words(Time.now, b.due_date) %>
-           (on <%= b.due_date.strftime("%m/%d/%Y") %>)</br>
+            <%= distance_of_time_in_words(Time.now, b.due_date) %>
+             (on <%= b.due_date.strftime("%m/%d/%Y") %>)</br>
           <% end %>
-          <small><%= b.user.first_name %> is responsible for this bill.</small>
+          <% if b.user_id == current_user.id %>
+            <% unless b.paid %>
+              <%= button_to("Mark as paid", controller: "bills", action: "mark_as_paid", id: b.id) %>
+            <% end %>
+          <% end %>
+          <% if b.user_id == current_user.id %>
+            <small>This bill is managed by you.</small>
+          <% else %>
+            <small>This bill is managed by <%= b.user.first_name %></small>
+          <% end %>
+         
           
         </div>
         
