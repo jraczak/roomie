@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120803181816) do
+ActiveRecord::Schema.define(:version => 20121009030925) do
+
+  create_table "bills", :force => true do |t|
+    t.string   "name"
+    t.string   "provider"
+    t.float    "total_due"
+    t.date     "due_date"
+    t.integer  "user_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "dwelling_id"
+  end
 
   create_table "dwelling_roomie_relationships", :force => true do |t|
     t.datetime "created_at", :null => false

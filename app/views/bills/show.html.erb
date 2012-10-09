@@ -1,0 +1,10 @@
+<div class="row">
+<h1><%= @bill.name %></h1>
+
+<ul>
+  <li>Total Due: $<%= @bill.total_due %></li>
+  <li>Due by: <%= @bill.due_date.to_s %></li>
+</ul>
+
+This bill is managed by <%= link_to @bill.user.first_name, @bill.user %>.
+</div>

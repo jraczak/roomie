@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  provider: MyString
+  total_due: 1.5
+  due_date: 2012-10-08
+  user_id: 1
+
+two:
+  name: MyString
+  provider: MyString
+  total_due: 1.5
+  due_date: 2012-10-08
+  user_id: 1

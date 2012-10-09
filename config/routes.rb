@@ -7,6 +7,7 @@ Roomie::Application.routes.draw do
   resources :users
   resources :dwellings
   resources :sessions, only: [:new, :create, :destroy]
+  resources :bills
   
   match '/signup', to: 'Users#new'
   match '/signin', to: 'sessions#new'

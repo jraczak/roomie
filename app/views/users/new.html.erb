@@ -1,8 +1,4 @@
-<div class="row">
-<h1>Sign up for Roomie!</h1>
-</div>
-
-  <% if @user.errors.any? %>
+<% if @user.errors.any? %>
   
     <h4 class="alert alert-error">The following <%= pluralize(@user.errors.count, "error") %> prevented us from creating your account. Check them out, make corrections, then try again!</h4>
     																													     
@@ -16,29 +12,23 @@
   <% end %>
 
 <div class="row">
+  <div class="span4 well">
+  <legend>Sign up for Roomie!</legend>
 
-<%= form_for(@user) do |f| %>
+  <fieldset>
+  <%= simple_form_for(@user) do |f| %>
 
-  <%= f.label :email %>
-  <%= f.text_field :email %>
+  <%= f.input :email %>
+  <%= f.input :first_name %>
+  <%= f.input :last_name %>
+  <%= f.input :password %>
+  <%= f.input :password_confirmation %>
+  <%= f.input :zip %>
   
-  <%= f.label :first_name %>
-  <%= f.text_field :first_name %>
-  
-  <%= f.label :last_name %>
-  <%= f.text_field :last_name %>
-  
-  <%= f.label :password %>
-  <%= f.password_field :password %>
-  
-  <%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation %>
-  
-  <%= f.label :zip %>
-  <%= f.text_field :zip %>
-  </br>
-  <%= f.submit "Create my account", class: "btn btn-primary" %>
-  
+  <%= f.button :submit, "Create my account" %>
+  </fieldset>
 <% end %>
 
+  Already have an account? <%= link_to "Sign in", signin_path %>. 
+</div>
 </div>

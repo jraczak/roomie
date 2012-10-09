@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   
   belongs_to :dwelling
   has_many :properties, :class_name => "Dwelling", :foreign_key => "owner_id"
+  has_many :bills
   
   validates :first_name, presence: true, length: { maximum: 50 }
   validates :last_name, presence: true, length: { maximum: 50 }

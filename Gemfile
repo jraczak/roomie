@@ -4,6 +4,7 @@ gem 'rails', '3.2.6'
 gem 'bootstrap-sass', '2.0.0'
 gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'sunspot_rails', '~> 1.3.3'
+gem 'simple_form'
 
 
 # Bundle edge Rails instead:
