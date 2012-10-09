@@ -9,5 +9,10 @@
        <li><h4><%= link_to "#{u.first_name} #{u.last_name}", u %></h4></li>
     <% end %>
     </ul>
+    
+  <h3><%= @dwelling.bills.count %>Active Bills</h3>
+    <% @dwelling.bills.each do |b| %>
+      <%= link_to b.name, b %>
+    <% end %>
 
 </div> 
