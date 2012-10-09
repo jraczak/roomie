@@ -1,0 +1,24 @@
+<%= simple_form_for(@bill) do |f| %>
+
+  <% if @bill.errors.any? %>
+  
+    <h2>The following <%= pluralize(@bill.errors.count, "error") %> prevented us from saving this bill. Check them out, make corrections, then try again!</h2>
+    																													     
+    <ul>																												     
+      <% @bill.errors.full_messages.each do |m| %>																	     
+      <li><%= m %> </li>																								     
+    </ul>																												     
+    																													     
+    <% end %>																											     
+  
+  <% end %>
+  
+  <%= f.input :name %>
+  <%= f.input :provider %>
+  <%= f.input :total_due %>
+  <%= f.input :due_date %>
+  <%= f.input :user_id, collection: current_user.dwelling.roomies.all, label_method: :full_name %>
+  
+  <%= f.button :submit, "Add this bill" %> <%= link_to "cancel", current_user.dwelling %>
+  
+<% end %>

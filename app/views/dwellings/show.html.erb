@@ -15,6 +15,7 @@
     </ul>
     
   <h3><%= @dwelling.bills.count %> Active Bills</h3>
+  <small><%= link_to "+ add a new bill", new_bill_path %></small>
     <div class="row">
     <% @dwelling.bills.each do |b| %>
         
@@ -22,7 +23,13 @@
           <b><%= link_to b.name, b %></b></br>
           <%= b.provider %></br>
           <b>Total due:</b> $<%= b.total_due %></br>
-          <b>Due in: </b><%= distance_of_time_in_words(Time.now, b.due_date) %> (on <%= b.due_date.strftime("%m/%d/%Y") %>)</br>
+          <b>Due in: </b>
+          <% if Time.now > b.due_date %>
+          <b>PAST DUE</b> (on <%= b.due_date.strftime("%m/%d/%Y") %>)</br>
+          <% else %>
+          <%= distance_of_time_in_words(Time.now, b.due_date) %>
+           (on <%= b.due_date.strftime("%m/%d/%Y") %>)</br>
+          <% end %>
           <small><%= b.user.first_name %> is responsible for this bill.</small>
           
         </div>
