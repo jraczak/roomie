@@ -1,6 +1,10 @@
 <div class="row">
   <h1><%= @dwelling.nickname %>
-  <h3 class="address"><%= "#{@dwelling.street_address} #{@dwelling.city}, #{@dwelling.state}" %></h3>
+  
+  <h3 class="address">
+  <%= @dwelling.street_address %></br>
+  <%= @dwelling.city %>, <%= @dwelling.state %> <%= @dwelling.zip %>
+  </h3>
   
   <h3>Currently living in this dwelling:</h3>
     
@@ -10,9 +14,20 @@
     <% end %>
     </ul>
     
-  <h3><%= @dwelling.bills.count %>Active Bills</h3>
+  <h3><%= @dwelling.bills.count %> Active Bills</h3>
+    <div class="row">
     <% @dwelling.bills.each do |b| %>
-      <%= link_to b.name, b %>
+        
+        <div class="span3 well">
+          <b><%= link_to b.name, b %></b></br>
+          <%= b.provider %></br>
+          <b>Total due:</b> $<%= b.total_due %></br>
+          <b>Due in: </b><%= distance_of_time_in_words(Time.now, b.due_date) %> (on <%= b.due_date.strftime("%m/%d/%Y") %>)</br>
+          <small><%= b.user.first_name %> is responsible for this bill.</small>
+          
+        </div>
+        
     <% end %>
+    </div>
 
 </div> 
