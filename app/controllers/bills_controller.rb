@@ -40,5 +40,12 @@ class BillsController < ApplicationController
     @bill.save
     redirect_to current_user.dwelling
   end
+  
+  def mark_as_unpaid
+    @bill = Bill.find(params[:id])
+    @bill.paid = false
+    @bill.save
+    redirect_to current_user.dwelling
+  end
 
 end

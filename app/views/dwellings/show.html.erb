@@ -59,6 +59,21 @@
     <% current_month = Time.now.strftime("%B") %> 
     <% next_month = (Time.new(Time.now.year, (Time.now.month + 1), Time.now.day)).strftime("%B") %>
     
+    <% next_month_int = 0 %>
+    <% @dwelling.bills.each do |b| %>
+      <% if b.due_date.month == ( Time.now.month + 1) %>
+        <% next_month_int += 1 %>
+      <% end %>
+    <% end %>
+    
+    <% this_month_int = 0 %>
+    <% @dwelling.bills.each do |b| %>
+      <% if b.due_date.month == ( Time.now.month ) %>
+        <% this_month_int += 1 %>
+      <% end %>
+    <% end %>
+      
+  <% unless this_month_int == 0 %>
     <legend><%= current_month %> Bills</legend>
     <div class="row">
     <% @dwelling.bills.each do |b| %>
@@ -81,15 +96,22 @@
             <% end %>
           <% end %>
           <% if b.user_id == current_user.id %>
-            <small>This bill is managed by you.</small>
+            <small>This bill is managed by you.</small></br>
           <% else %>
-            <small>This bill is managed by <%= b.user.first_name %></small>
+            <small>This bill is managed by <%= b.user.first_name %></small></br>
+          <% end %>
+          <% if b.paid && b.user_id == current_user.id %>
+            <small class="pull-right">Not paid? <%= link_to "Undo.", controller: "bills", action: "mark_as_unpaid", id: b.id %></small>
           <% end %>
         </div>
       <% end %>
     <% end %>
     </div>
-    
+  <% else %>
+  There are no active bills this month.
+  <% end %>
+     
+  <% unless next_month_int == 0 %>
     <legend><%= next_month %> Bills</legend>
     <div class="row">
     <% @dwelling.bills.each do |b| %>
@@ -116,10 +138,14 @@
           <% else %>
             <small>This bill is managed by <%= b.user.first_name %></small>
           <% end %>
+          <% if b.paid && b.user_id == current_user.id %>
+            <small class="pull-right">Not paid? <%= link_to "Undo.", controller: "bills", action: "mark_as_unpaid", id: b.id %></small>
+          <% end %>
         </div>
       <% end %>
     <% end %>
     </div>
+  <% end %>
     
     <legend>Bills Later This Year</legend>
     <div class="row">
@@ -145,6 +171,9 @@
             <small>This bill is managed by you.</small>
           <% else %>
             <small>This bill is managed by <%= b.user.first_name %></small>
+          <% end %>
+          <% if b.paid && b.user_id == current_user.id %>
+            <small class="pull-right">Not paid? <%= link_to "Undo.", controller: "bills", action: "mark_as_unpaid", id: b.id %></small>
           <% end %>
         </div>
       <% end %>

@@ -14,6 +14,7 @@ Roomie::Application.routes.draw do
   match '/signout', to: 'sessions#destroy', via: :delete
   match 'dwellings_controller/search/:q' => 'dwellings_controller#search'
   match '/bills/:id/mark_as_paid', to: 'bills#mark_as_paid'
+  match '/bills/:id/mark_as_unpaid', to: 'bills#mark_as_unpaid'
   
   
   # The priority is based upon order of creation:
