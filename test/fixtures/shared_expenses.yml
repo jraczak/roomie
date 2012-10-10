@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  stocked: false
+  last_purchased: 2012-10-10 17:24:42
+  dwelling_id: 1
+  user_id: 1
+
+two:
+  name: MyString
+  stocked: false
+  last_purchased: 2012-10-10 17:24:42
+  dwelling_id: 1
+  user_id: 1

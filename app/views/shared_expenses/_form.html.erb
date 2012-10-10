@@ -1,0 +1,22 @@
+<%= simple_form_for(@shared_expense) do |f| %>
+
+  <% if @shared_expense.errors.any? %>
+  
+    <h2>The following <%= pluralize(@shared_expense.errors.count, "error") %> prevented us from saving this expense. Check them out, make corrections, then try again!</h2>
+    																													     
+    <ul>																												     
+      <% @shared_expense.errors.full_messages.each do |m| %>																	     
+      <li><%= m %> </li>																								     
+    </ul>																												     
+    																													     
+    <% end %>																											     
+  
+  <% end %>
+  
+  <%= f.input :name %>
+  <%= f.input :stocked, as: :radio_buttons, label: "Do you have any now?" %>
+  <%= f.input :user_id, collection: current_user.dwelling.roomies.all, label_method: :full_name, label: "Who's up to buy first?" %>
+  
+  <%= f.button :submit, "Add this expense to our list." %> <%= link_to "cancel", current_user.dwelling %>
+  
+<% end %>

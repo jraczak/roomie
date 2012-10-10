@@ -21,7 +21,7 @@
   </div>
 </div>  
   
-  <legend><%= @dwelling.bills.count %> Active Bills <small><%= "(#{@dwelling.bills.where(paid: false).count} unpaid)" %></small></legend>
+  <legend><%= pluralize(@dwelling.bills.count, "Active Bill") %><small> <%= "(#{@dwelling.bills.where(paid: false).count} unpaid)" %></small></legend>
   <small><%= link_to "+ add a new bill", new_bill_path %></small>
     <!-- BEGIN CODE FOR LIST OF BILLS NOT SORTED BY DUE DATE MONTH
     <div class="row">
@@ -179,3 +179,6 @@
       <% end %>
     <% end %>
     </div>
+    
+    <legend><%= pluralize(@dwelling.shared_expenses.count, "Expense") %></legend>
+    <small><%= link_to "+ add a new expense", new_shared_expense_path %></small>
