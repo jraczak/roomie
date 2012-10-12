@@ -181,4 +181,7 @@
     </div>
     
     <legend><%= pluralize(@dwelling.shared_expenses.count, "Expense") %></legend>
-    <small><%= link_to "+ add a new expense", new_shared_expense_path %></small>
+    <small><%= link_to "+ add a new expense", new_shared_expense_path %></small></br>
+      <% @dwelling.shared_expenses.each do |se| %>
+        <%= se.name %> owned by <%= se.user.first_name %> <%= button_to "I bought this.", controller: "shared_expenses", action: "change_owner", id: se.id %>
+      <% end %>
