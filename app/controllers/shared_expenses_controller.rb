@@ -15,13 +15,18 @@ class SharedExpensesController < ApplicationController
     end
   end
   
+  # Updates the "user" of the object to the next user in the array of roomies via user_id
   def change_owner
     @shared_expense = SharedExpense.find(params[:id])
     current_owner = @shared_expense.user
     roomies = @shared_expense.dwelling.roomies.sort_by { |roomie| roomie.id }
     next_owner_index = roomies.index {|roomie| roomie.id == current_owner.id} + 1
-    next_owner = roomies[next_owner_index]
-    @shared_expense.user = next_owner
+    if roomies[next_owner_index] != nil
+      @shared_expense.user_id = roomies[next_owner_index].id
+    else
+      @shared_expense.user_id = roomies[0].id
+    end
+    @shared_expense.save
     redirect_to current_user.dwelling
   end
     
