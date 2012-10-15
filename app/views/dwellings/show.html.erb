@@ -76,20 +76,39 @@
   <% unless this_month_int == 0 %>
     <legend><%= current_month %> Bills</legend>
     <div class="row">
+    <table class="table span12 dwelling-bill-list">
+          <thead>
+          <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          </tr>
+          </thead>
     <% @dwelling.bills.each do |b| %>
       <% if b.due_date.strftime("%B") == current_month %>
         
-        <div class="span3 well <% if b.paid %>paid-bill<% end %>">
-          <b><%= link_to b.name, b %></b><% if b.paid %><b> (PAID)</b><% end %></br>
-          <%= b.provider %></br>
-          <b>Total due:</b> $<%= "%.2f" % b.total_due %></br>
-          <b>Due in: </b>
+        
+          <tbody>
+          <tr>
+          <td>
+          <span class="bill-detail"><%= link_to b.name, b %></span><% if b.paid %><b> (PAID)</b><% end %></br>
+          <%= b.provider %>
+          </td>
+          <td>
+          <span class="bill-detail">$<%= "%.2f" % b.total_due %></span></br>
+          total due
+          </td>
+          <td>
           <% if Time.now > b.due_date %>
-            <b>PAST DUE</b> (on <%= b.due_date.strftime("%m/%d/%Y") %>)</br>
+            <span class="bill-detail">PAST DUE</span></br> (on <%= b.due_date.strftime("%m/%d/%Y") %>)</br>
           <% else %>
-            <%= distance_of_time_in_words(Time.now, b.due_date) %>
-             (on <%= b.due_date.strftime("%m/%d/%Y") %>)</br>
+            <span class="bill-detail"><%= distance_of_time_in_words(Time.now, b.due_date) %></span></br>
+             on <%= b.due_date.strftime("%m/%d/%Y") %>
           <% end %>
+          due in
+          </td>
+          <td>
           <% if b.user_id == current_user.id %>
             <% unless b.paid %>
               <%= button_to("Mark as paid", controller: "bills", action: "mark_as_paid", id: b.id) %>
@@ -103,13 +122,18 @@
           <% if b.paid && b.user_id == current_user.id %>
             <small class="pull-right">Not paid? <%= link_to "Undo.", controller: "bills", action: "mark_as_unpaid", id: b.id %></small>
           <% end %>
+          </td>
         </div>
       <% end %>
+    </tr>
     <% end %>
     </div>
+    </tbody>
+    </table>
   <% else %>
   There are no active bills this month.
   <% end %>
+  
      
   <% unless next_month_int == 0 %>
     <legend><%= next_month %> Bills</legend>

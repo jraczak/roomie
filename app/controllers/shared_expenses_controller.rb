@@ -21,11 +21,13 @@ class SharedExpensesController < ApplicationController
     current_owner = @shared_expense.user
     roomies = @shared_expense.dwelling.roomies.sort_by { |roomie| roomie.id }
     next_owner_index = roomies.index {|roomie| roomie.id == current_owner.id} + 1
+    
     if roomies[next_owner_index] != nil
       @shared_expense.user_id = roomies[next_owner_index].id
     else
       @shared_expense.user_id = roomies[0].id
     end
+    
     @shared_expense.save
     redirect_to current_user.dwelling
   end

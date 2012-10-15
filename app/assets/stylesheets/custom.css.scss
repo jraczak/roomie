@@ -4,7 +4,32 @@
   background-color: #5E9B77;
 }
 
+.dwelling-bill-list {
+
+}
+
+.dwelling-bill-list tr {
+  height: 100px;
+  border-spacing: 0px 20px;
+}
+
+.dwelling-bill-list td {
+  vertical-align: middle;
+  border-spacing: 0px 20px;
+}
+
+
+.bill-detail {
+  font-weight: bold;
+  font-size: xx-large;
+}
+
 /* UNIVERSAL STYLES */
+
+table {
+  border-collapse: separate;
+  border-spacing: 20px 20px;
+}
 
 body {
   padding-top: 60px;
