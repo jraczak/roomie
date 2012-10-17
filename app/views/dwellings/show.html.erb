@@ -1,5 +1,5 @@
 <div class="row">
-  <h1><%= @dwelling.nickname %></h1>
+  <h2><%= @dwelling.nickname %></h2>
 </div>
 
 <div class="row">
@@ -74,17 +74,17 @@
     <% end %>
       
   <% unless this_month_int == 0 %>
-    <legend><%= current_month %> Bills</legend>
+    <h2><%= current_month %> Bills</h2>
     <div class="row">
     <table class="table span12 dwelling-bill-list">
-          <thead>
+          <!-- <thead>
           <tr>
           <th></th>
           <th></th>
           <th></th>
           <th></th>
           </tr>
-          </thead>
+          </thead> -->
     <% @dwelling.bills.each do |b| %>
       <% if b.due_date.strftime("%B") == current_month %>
         
@@ -96,17 +96,19 @@
           <%= b.provider %>
           </td>
           <td>
-          <span class="bill-detail">$<%= "%.2f" % b.total_due %></span></br>
-          total due
+          total due</br>
+          <span class="bill-detail">$<%= "%.2f" % b.total_due %></span>
+          
           </td>
           <td>
           <% if Time.now > b.due_date %>
-            <span class="bill-detail">PAST DUE</span></br> (on <%= b.due_date.strftime("%m/%d/%Y") %>)</br>
+            <span class="bill-detail">PAST DUE</span> (was due <%= b.due_date.strftime("%m/%d/%Y") %>)</br>
           <% else %>
-            <span class="bill-detail"><%= distance_of_time_in_words(Time.now, b.due_date) %></span></br>
-             on <%= b.due_date.strftime("%m/%d/%Y") %>
+            due in </br>
+            <span class="bill-detail"><%= distance_of_time_in_words(Time.now, b.due_date) %></span>
+            (on <%= b.due_date.strftime("%m/%d/%Y") %>)    
           <% end %>
-          due in
+          
           </td>
           <td>
           <% if b.user_id == current_user.id %>
@@ -133,44 +135,75 @@
   <% else %>
   There are no active bills this month.
   <% end %>
+  </div>
   
-     
+  <!-- BEGIN CODE FOR NEXT MONTH BILLS -->   
   <% unless next_month_int == 0 %>
-    <legend><%= next_month %> Bills</legend>
+    <h2><%= next_month %> Bills</h2>
     <div class="row">
+    <table class="table span12 dwelling-bill-list">
+          <!-- <thead>
+          <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          </tr>
+          </thead> -->
+    
     <% @dwelling.bills.each do |b| %>
       <% if b.due_date.strftime("%B") == next_month %>
         
-        <div class="span3 well <% if b.paid %>paid-bill<% end %>">
-          <b><%= link_to b.name, b %></b><% if b.paid %><b> (PAID)</b><% end %></br>
-          <%= b.provider %></br>
-          <b>Total due:</b> $<%= "%.2f" % b.total_due %></br>
-          <b>Due in: </b>
+        <tbody>
+          <tr>
+          <td>
+          <span class="bill-detail"><%= link_to b.name, b %></span><% if b.paid %><b> (PAID)</b><% end %></br>
+          <%= b.provider %>
+          </td>
+          <td>
+          total due</br>
+          <span class="bill-detail">$<%= "%.2f" % b.total_due %></span>
+          
+          </td>
+          <td>
           <% if Time.now > b.due_date %>
-            <b>PAST DUE</b> (on <%= b.due_date.strftime("%m/%d/%Y") %>)</br>
+            <span class="bill-detail">PAST DUE</span> (was due <%= b.due_date.strftime("%m/%d/%Y") %>)</br>
           <% else %>
-            <%= distance_of_time_in_words(Time.now, b.due_date) %>
-             (on <%= b.due_date.strftime("%m/%d/%Y") %>)</br>
+            due in </br>
+            <span class="bill-detail"><%= distance_of_time_in_words(Time.now, b.due_date) %></span>
+            (on <%= b.due_date.strftime("%m/%d/%Y") %>)    
           <% end %>
+          
+          </td>
+          <td>
           <% if b.user_id == current_user.id %>
             <% unless b.paid %>
               <%= button_to("Mark as paid", controller: "bills", action: "mark_as_paid", id: b.id) %>
             <% end %>
           <% end %>
           <% if b.user_id == current_user.id %>
-            <small>This bill is managed by you.</small>
+            <small>This bill is managed by you.</small></br>
           <% else %>
-            <small>This bill is managed by <%= b.user.first_name %></small>
+            <small>This bill is managed by <%= b.user.first_name %></small></br>
           <% end %>
           <% if b.paid && b.user_id == current_user.id %>
             <small class="pull-right">Not paid? <%= link_to "Undo.", controller: "bills", action: "mark_as_unpaid", id: b.id %></small>
           <% end %>
+          </td>
         </div>
       <% end %>
+    </tr>
     <% end %>
     </div>
+    </tbody>
+    </table>
+    <% else %>
+  There are no active bills this month.
   <% end %>
-    
+  <!-- END CODE FOR NEXT MONTH BILLS -->
+  
+  
+    <!-- BEGIN CODE FOR BILLS LATER THIS YEAR -->
     <legend>Bills Later This Year</legend>
     <div class="row">
       <% @dwelling.bills.each do |b| %>
@@ -203,6 +236,7 @@
       <% end %>
     <% end %>
     </div>
+    <!-- END CODE FOR BILLS LATER THIS YEAR -->
     
     <legend><%= pluralize(@dwelling.shared_expenses.count, "Expense") %></legend>
     <small><%= link_to "+ add a new expense", new_shared_expense_path %></small></br>
