@@ -46,6 +46,12 @@
 
 /* END DWELLING VIEW STYLES */
 
+/* FORM STYLES */
+
+.form-buttons {
+  margin-top: 40px;
+}
+
 /* UNIVERSAL STYLES */
 
 table {
@@ -55,9 +61,12 @@ table {
 
 body {
   padding-top: 60px;
-  background-color: white;
-  /* background-color: #f0f0ed; */
-  }
+  background-color: #fff;
+}
+
+header .container {
+  background-color: #33363b;
+}
   
 .container {
 

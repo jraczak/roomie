@@ -19,6 +19,8 @@
   <%= f.input :due_date, start_year: Date.today.year, end_year: Date.today.year + 1 %>
   <%= f.input :user_id, collection: current_user.dwelling.roomies.all, label_method: :full_name, default: current_user %>
   
-  <%= f.button :submit, "Add this bill" %> <%= link_to "cancel", current_user.dwelling %>
+  <div class="form-buttons">
+  <%= f.submit "Add this bill", method: "create", class: "btn-blue" %> <%= link_to "cancel", current_user.dwelling, class: "btn-red" %>
+  </div>
   
 <% end %>
