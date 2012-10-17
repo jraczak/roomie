@@ -92,7 +92,7 @@
         
           <tbody>
           <tr <% if Time.now.to_date + 5 >= b.due_date && !(Time.now > b.due_date) %> <%= "class='due-soon-bill'" %> <% end %>>
-          <td>
+          <td class="bill-name">
           <span class="bill-detail"><%= link_to b.name, b %></span><% if b.paid %><b> (PAID)</b><% end %></br>
           <%= b.provider %>
           </td>
@@ -160,7 +160,7 @@
         
         <tbody>
           <tr>
-          <td>
+          <td class="bill-name">
           <span class="bill-detail"><%= link_to b.name, b %></span><% if b.paid %><b> (PAID)</b><% end %></br>
           <%= b.provider %>
           </td>
