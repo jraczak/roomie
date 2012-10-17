@@ -10,18 +10,18 @@
   </h3>
   </div>
   
-  <div class="span6 pull-right">
-  <h3>Currently living in this dwelling:</h3>
+  <div class="span3 pull-right">
+  <h3><%= @dwelling.roomies.count %> roomies here</h3>
     
-    <ul id="roomie_list">
+    <div id="roomie-list">
      <% @dwelling.roomies.each do |u| %>
-       <li><h4><%= link_to u.full_name, u %></h4></li>
+       <%= link_to u.full_name, u %></br>
     <% end %>
-    </ul>
+    </div>
   </div>
 </div>  
   
-  <legend><%= pluralize(@dwelling.bills.count, "Active Bill") %><small> <%= "(#{@dwelling.bills.where(paid: false).count} unpaid)" %></small></legend>
+  <h2><%= pluralize(@dwelling.bills.count, "Active Bill") %><small> <%= "(#{@dwelling.bills.where(paid: false).count} unpaid)" %></small></h2>
   <small><%= link_to "+ add a new bill", new_bill_path %></small>
     <!-- BEGIN CODE FOR LIST OF BILLS NOT SORTED BY DUE DATE MONTH
     <div class="row">
@@ -72,7 +72,8 @@
         <% this_month_int += 1 %>
       <% end %>
     <% end %>
-      
+  
+  <!-- BEGIN CODE FOR THIS MONTH BILLS -->    
   <% unless this_month_int == 0 %>
     <h2><%= current_month %> Bills</h2>
     <div class="row">
@@ -90,7 +91,7 @@
         
         
           <tbody>
-          <tr>
+          <tr <% if Time.now.to_date + 5 >= b.due_date && !(Time.now > b.due_date) %> <%= "class='due-soon-bill'" %> <% end %>>
           <td>
           <span class="bill-detail"><%= link_to b.name, b %></span><% if b.paid %><b> (PAID)</b><% end %></br>
           <%= b.provider %>
@@ -102,7 +103,8 @@
           </td>
           <td>
           <% if Time.now > b.due_date %>
-            <span class="bill-detail">PAST DUE</span> (was due <%= b.due_date.strftime("%m/%d/%Y") %>)</br>
+            </br>
+            <span class="bill-detail late-bill">PAST DUE</span> (was due <%= b.due_date.strftime("%m/%d/%Y") %>)</br>
           <% else %>
             due in </br>
             <span class="bill-detail"><%= distance_of_time_in_words(Time.now, b.due_date) %></span>
@@ -114,6 +116,7 @@
           <% if b.user_id == current_user.id %>
             <% unless b.paid %>
               <%= button_to("Mark as paid", controller: "bills", action: "mark_as_paid", id: b.id) %>
+               <%= button_to "Delete bill", b, confirm: "Are you sure you want to delete this bill? It will be destroyed for good.", method: "delete", id: b.id %>
             <% end %>
           <% end %>
           <% if b.user_id == current_user.id %>
@@ -136,6 +139,7 @@
   There are no active bills this month.
   <% end %>
   </div>
+  <!-- END CODE FOR THIS MONTH BILLS -->
   
   <!-- BEGIN CODE FOR NEXT MONTH BILLS -->   
   <% unless next_month_int == 0 %>
@@ -207,6 +211,7 @@
     <legend>Bills Later This Year</legend>
     <div class="row">
       <% @dwelling.bills.each do |b| %>
+      <% if b.due_date > Time.now.to_date %>
         <% unless b.due_date.strftime("%B") == current_month || b.due_date.strftime("%B") == next_month %>
           <div class="span3 well <% if b.paid %>paid-bill<% end %>">
           <b><%= link_to b.name, b %></b><% if b.paid %><b> (PAID)</b><% end %></br>
@@ -234,6 +239,7 @@
           <% end %>
         </div>
       <% end %>
+    <% end %>
     <% end %>
     </div>
     <!-- END CODE FOR BILLS LATER THIS YEAR -->

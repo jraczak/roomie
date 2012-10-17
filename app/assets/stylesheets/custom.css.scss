@@ -1,11 +1,13 @@
 /* CUSTOM CSS STYLES */
 
+/* DWELLING VIEW STYLES */
+
 .paid-bill {
   background-color: #5E9B77;
 }
 
 .dwelling-bill-list {
-  margin-bottom: 200px;
+  margin-bottom: 10px;
 }
 
 .dwelling-bill-list tr {
@@ -24,6 +26,22 @@
   font-size: xx-large;
 }
 
+.late-bill {
+  color: red;
+}
+
+.due-soon-bill {
+  background-color: #ffecc4;
+}
+
+#roomie-list {
+  background-color: white;
+  padding: 10px 10px;
+}
+
+
+/* END DWELLING VIEW STYLES */
+
 /* UNIVERSAL STYLES */
 
 table {
@@ -33,7 +51,8 @@ table {
 
 body {
   padding-top: 60px;
-  background-color: #f0f0ed;
+  background-color: white;
+  /* background-color: #f0f0ed; */
   }
   
 .container {

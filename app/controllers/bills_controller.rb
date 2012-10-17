@@ -34,6 +34,12 @@ class BillsController < ApplicationController
     end
   end
   
+  def destroy
+    @bill = Bill.find(params[:id])
+    @bill.destroy
+    redirect_to current_user.dwelling
+  end
+  
   def mark_as_paid
     @bill = Bill.find(params[:id])
     @bill.paid = true

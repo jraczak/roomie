@@ -4,4 +4,7 @@ class Bill < ActiveRecord::Base
   belongs_to :user
   belongs_to :dwelling
   
+  validates :total_due, :presence => true, 
+                        :numericality => true
+  
 end
