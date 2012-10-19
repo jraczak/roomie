@@ -28,6 +28,7 @@ class SharedExpensesController < ApplicationController
       @shared_expense.user_id = roomies[0].id
     end
     
+    @shared_expense.last_purchased = Time.now.to_date
     @shared_expense.save
     redirect_to current_user.dwelling
   end

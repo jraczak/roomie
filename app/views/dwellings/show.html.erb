@@ -114,13 +114,14 @@
           </td>
           <td>
           <% if b.user_id == current_user.id %>
+            manage bill
             <% unless b.paid %>
               <%= button_to("Mark as paid", controller: "bills", action: "mark_as_paid", id: b.id) %>
                <%= button_to "Delete bill", b, confirm: "Are you sure you want to delete this bill? It will be destroyed for good.", method: "delete", id: b.id %>
             <% end %>
           <% end %>
           <% if b.user_id == current_user.id %>
-            <small>This bill is managed by you.</small></br>
+            <small></small></br>
           <% else %>
             <small>This bill is managed by <%= b.user.first_name %></small></br>
           <% end %>
@@ -247,5 +248,5 @@
     <legend><%= pluralize(@dwelling.shared_expenses.count, "Expense") %></legend>
     <small><%= link_to "+ add a new expense", new_shared_expense_path %></small></br>
       <% @dwelling.shared_expenses.each do |se| %>
-        <%= se.name %> owned by <%= se.user.first_name %> <%= button_to "I bought this.", controller: "shared_expenses", action: "change_owner", id: se.id %>
+        <%= se.name %> owned by <%= se.user.first_name %> Last bought: <% unless se.last_purchased == nil %><%= se.last_purchased.to_time.strftime("%m/%d/%Y") %><% end %> <%= button_to "I bought this.", controller: "shared_expenses", action: "change_owner", id: se.id %>
       <% end %>
