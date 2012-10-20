@@ -250,3 +250,6 @@
       <% @dwelling.shared_expenses.each do |se| %>
         <%= se.name %> owned by <%= se.user.first_name %> Last bought: <% unless se.last_purchased == nil %><%= se.last_purchased.to_time.strftime("%m/%d/%Y") %><% end %> <%= button_to "I bought this.", controller: "shared_expenses", action: "change_owner", id: se.id %>
       <% end %>
+      
+      <h3>Visits</h3>
+      <%= link_to "schedule a new visit", new_visit_path %>

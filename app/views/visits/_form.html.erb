@@ -1,0 +1,25 @@
+<%= simple_form_for(@visit) do |f| %>
+
+  <% if @visit.errors.any? %>
+  
+    <h2>The following <%= pluralize(@visit.errors.count, "error") %> prevented us from scheduling your visit. Check them out, make corrections, then try again!</h2>
+    																													     
+    <ul>																												     
+      <% @visit.errors.full_messages.each do |m| %>																	     
+      <li><%= m %> </li>																								     
+    </ul>																												     
+    																													     
+    <% end %>																											     
+  
+  <% end %>
+  
+  <%= f.input :description, placeholder: "Who's coming? Where will they sleep? Give your roomies a little info." %>
+  <%= f.input :number_of_guests %>
+  <%= f.input :start_date %>
+  <%= f.input :end_date %>
+  
+  <div class="form-buttons">
+  <%= f.submit "schedule this visit", method: "create", class: "btn-blue" %> <%= link_to "cancel", current_user.dwelling, class: "btn-red" %>
+  </div>
+  
+<% end %>
