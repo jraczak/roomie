@@ -1,0 +1,24 @@
+<h1>Users</h1>
+
+<%= form_tag users_path, method: "get" do %>
+  <%= text_field_tag :email, params[:email], placeholder: "search for roomies by email" %>
+  <%= submit_tag "Search", name: nil %>
+<% end %>
+</br>
+
+<% if @users.any? %>
+  <% @users.each do |u| %>
+  <%= link_to u.full_name, u %></br>
+<% end %>
+<% else %>
+  No users.
+<% end %>
+
+</br>
+      
+      
+      
+    <!--  <%= simple_form_for :user, method: "get", html: {class: "form-search"} do |f| %>
+        <%= f.input_field :email, placeholder: "email address", class: "input-medium search-query" %>
+        <%= f.submit "Search", class: "btn" %>
+      <% end %> -->

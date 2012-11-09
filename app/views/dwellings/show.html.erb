@@ -18,6 +18,12 @@
        <%= link_to u.full_name, u %></br>
     <% end %>
     </div>
+    <div id="invite-roomies">
+      <%= simple_form_for :user, method: "get", html: {class: "form-search"} do |f| %>
+        <%= f.input_field :email, placeholder: "email address", class: "input-medium search-query" %>
+        <%= f.submit "Search", class: "btn" %>
+      <% end %>
+    </div>
   </div>
 </div>  
   

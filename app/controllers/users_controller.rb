@@ -3,6 +3,14 @@ class UsersController < ApplicationController
   before_filter :signed_in_user, only: [:edit, :update]
   before_filter :correct_user, only: [:edit, :update]
   
+  def index
+    @users = User.search(params[:email])
+  end
+  
+  #def index(*email)
+  #  @users = User.search(:email)
+  #end
+  
   def show
     @user = User.find(params[:id])
   end
@@ -33,6 +41,12 @@ class UsersController < ApplicationController
     else
       render 'edit'
     end
+  end
+  
+  def find_user
+    @user = User.where(params[:email])
+    flash[:success] = "You searched for #{:email}"
+    redirect_to current_user.dwelling
   end
   
   private

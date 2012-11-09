@@ -18,6 +18,7 @@ Roomie::Application.routes.draw do
   match '/bills/:id/mark_as_paid', to: 'bills#mark_as_paid'
   match '/bills/:id/mark_as_unpaid', to: 'bills#mark_as_unpaid'
   match '/shared_expenses/:id/change_owner', to: 'shared_expenses#change_owner'
+  match '/users/find_user', to: 'users#find_user'
   
   
   # The priority is based upon order of creation:
