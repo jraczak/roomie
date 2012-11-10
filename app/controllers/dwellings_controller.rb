@@ -28,5 +28,7 @@ class DwellingsController < ApplicationController
   
   def destroy
   end
-
+  
+  # Methods related to Roomies
+  
 end

@@ -7,10 +7,6 @@ class UsersController < ApplicationController
     @users = User.search(params[:email])
   end
   
-  #def index(*email)
-  #  @users = User.search(:email)
-  #end
-  
   def show
     @user = User.find(params[:id])
   end

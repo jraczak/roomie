@@ -1,6 +1,12 @@
 <div class="row">
+  <div class="span12">
   <h2><%= @dwelling.nickname %></h2>
+  </div>
 </div>
+
+<% if current_user && @dwelling.is_roomie?(current_user) %>
+
+
 
 <div class="row">
   <div class="span6 pull-left"  
@@ -18,12 +24,9 @@
        <%= link_to u.full_name, u %></br>
     <% end %>
     </div>
-    <div id="invite-roomies">
-      <%= simple_form_for :user, method: "get", html: {class: "form-search"} do |f| %>
-        <%= f.input_field :email, placeholder: "email address", class: "input-medium search-query" %>
-        <%= f.submit "Search", class: "btn" %>
-      <% end %>
-    </div>
+    <p>Want to invite more roomies to your dwelling?
+    <%= link_to "Search for roomies", users_path %>
+    </p>
   </div>
 </div>  
   
@@ -259,3 +262,9 @@
       
       <h3>Visits</h3>
       <%= link_to "schedule a new visit", new_visit_path %>
+      
+<% else %>
+
+You do not live here.
+
+<% end %>

@@ -11,4 +11,8 @@ class Dwelling < ActiveRecord::Base
   validates :state, presence: true
   validates :zip, presence: true
   
+  def is_roomie?(user)
+    roomies.include?(user)
+  end
+  
 end
