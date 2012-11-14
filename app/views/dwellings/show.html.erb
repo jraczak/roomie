@@ -1,37 +1,33 @@
 <div class="row">
-  <div class="span12">
-  <h2><%= @dwelling.nickname %></h2>
+  <div class="span8 pull-left">
+   <h1><%= @dwelling.nickname %></h1>
   </div>
-</div>
 
 <% if current_user && @dwelling.is_roomie?(current_user) %>
 
-
-
-<div class="row">
-  <div class="span6 pull-left"  
-  <h3 class="address">
-  <%= @dwelling.street_address %></br>
-  <%= @dwelling.city %>, <%= @dwelling.state %> <%= @dwelling.zip %>
-  </h3>
-  </div>
-  
-  <div class="span3 pull-right">
-  <h3><%= @dwelling.roomies.count %> roomies here</h3>
-    
-    <div id="roomie-list">
-     <% @dwelling.roomies.each do |u| %>
-       <%= link_to u.full_name, u %></br>
-    <% end %>
-    </div>
-    <p>Want to invite more roomies to your dwelling?
-    <%= link_to "Search for roomies", users_path %>
+  <div class="span3 pull-right" id="roomie-list">
+    <span class="module-header">Roomies</span> </br>
+      <% @dwelling.roomies.each do |u| %>
+        <%= link_to u.full_name, u %></br>
+      <% end %>
+    <p class="small-text">Want to invite more roomies to your dwelling?
+      <%= link_to "Search for roomies", users_path %>
     </p>
   </div>
-</div>  
+
+  <div class="span6 pull-left"  
+    <h3 class="address">
+      <%= @dwelling.street_address %></br>
+      <%= @dwelling.city %>, <%= @dwelling.state %> <%= @dwelling.zip %></br>
+      On the map since <%= @dwelling.created_at.strftime("%B %Y") %>
+    </h3>
+  </div>
+</div>
+
   
-  <h2><%= pluralize(@dwelling.bills.count, "Active Bill") %><small> <%= "(#{@dwelling.bills.where(paid: false).count} unpaid)" %></small></h2>
-  <small><%= link_to "+ add a new bill", new_bill_path %></small>
+  
+  <span class="bills-month-header"><%= pluralize(@dwelling.bills.count, "Active Bill") %><small> <%= "(#{@dwelling.bills.where(paid: false).count} unpaid)" %></small></span></br>
+  <small><%= link_to "+ add a new bill", new_bill_path %></small></br>
     <!-- BEGIN CODE FOR LIST OF BILLS NOT SORTED BY DUE DATE MONTH
     <div class="row">
     <% @dwelling.bills.each do |b| %>
@@ -84,7 +80,7 @@
   
   <!-- BEGIN CODE FOR THIS MONTH BILLS -->    
   <% unless this_month_int == 0 %>
-    <h2><%= current_month %> Bills</h2>
+    <div class="bills-month-header"><%= current_month %> Bills</div>
     <div class="row">
     <table class="table span12 dwelling-bill-list">
           <!-- <thead>
@@ -153,7 +149,7 @@
   
   <!-- BEGIN CODE FOR NEXT MONTH BILLS -->   
   <% unless next_month_int == 0 %>
-    <h2><%= next_month %> Bills</h2>
+    <div class="bills-month-header"><%= next_month %> Bills</div>
     <div class="row">
     <table class="table span12 dwelling-bill-list">
           <!-- <thead>
@@ -254,11 +250,26 @@
     </div>
     <!-- END CODE FOR BILLS LATER THIS YEAR -->
     
-    <legend><%= pluralize(@dwelling.shared_expenses.count, "Expense") %></legend>
+    <!-- BEGIN SHARED EXPENSES -->
+    
+    <div class="row">
+      <div class="span12">
+    <span class="bills-month-header"><%= pluralize(@dwelling.shared_expenses.count, "Expense") %></span></br>
     <small><%= link_to "+ add a new expense", new_shared_expense_path %></small></br>
+      </div>
+    </div>
       <% @dwelling.shared_expenses.each do |se| %>
-        <%= se.name %> owned by <%= se.user.first_name %> Last bought: <% unless se.last_purchased == nil %><%= se.last_purchased.to_time.strftime("%m/%d/%Y") %><% end %> <%= button_to "I bought this.", controller: "shared_expenses", action: "change_owner", id: se.id %>
+        <div class="span3">
+        <%= se.name %></br>
+        owned by <%= se.user.first_name %></br>
+        Last bought: 
+        <% unless se.last_purchased == nil %>
+          <%= se.last_purchased.to_time.strftime("%m/%d/%Y") %>
+        <% end %> 
+        <%= button_to "I bought this.", controller: "shared_expenses", action: "change_owner", id: se.id %>
+        </div>
       <% end %>
+      
       
       <h3>Visits</h3>
       <%= link_to "schedule a new visit", new_visit_path %>

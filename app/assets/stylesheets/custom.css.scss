@@ -1,5 +1,15 @@
 /* CUSTOM CSS STYLES */
 
+/* TYPOGRAPHY */
+
+a {
+  font-weight: bold;
+}
+
+.small-text {
+  font-size: .85em;
+}
+
 /* HEADER STYLES */
 
 .login-button {
@@ -14,6 +24,7 @@
 }
 
 .dwelling-bill-list {
+  margin-top: 20px;
   margin-bottom: 10px;
 }
 
@@ -188,4 +199,23 @@ header .container {
   background-image: url('../images/key_icon.jpg');
   margin-left: 5px;
   margin-right: 5px;
+}
+
+/* MODULES */
+
+#roomie-list {
+  text-align: left;
+  background-color: #dddddd;
+  padding: 30px 20px 5px 20px;
+}
+
+.module-header {
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
+  /* BILLS MODULE */
+.bills-month-header {
+  font-size: 2.0em;
+  padding-top: 20px;
 }
